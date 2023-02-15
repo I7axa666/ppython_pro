@@ -1,26 +1,23 @@
 class FlatIterator:
-
     def __init__(self, list_of_list):
         self.list_of_list = list_of_list.copy()
 
-
     def __iter__(self):
         self.cursor = -1
-        self.my_list = []
-        self.l = self.list_of_list
+        self.result_list = []
+        self.copy_of_list = self.list_of_list
         return self
 
     def __next__(self):
-
-        while self.l:
-            item = self.l.pop(-1)
+        while self.copy_of_list:
+            item = self.copy_of_list.pop(-1)
             if type(item) is list:
-                self.l.extend(item)
+                self.copy_of_list.extend(item)
             else:
-                self.my_list.append(item)
+                self.result_list.append(item)
 
-        if self.cursor < len(self.my_list) - 1:
-            self.list_of_list = self.my_list[::-1]
+        if self.cursor < len(self.result_list) - 1:
+            self.list_of_list = self.result_list[::-1]
             self.cursor += 1
             return self.list_of_list[self.cursor]
         else:

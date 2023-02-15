@@ -2,18 +2,17 @@ import types
 
 
 def flat_generator(list_of_lists):
-    my_list = []
-    l = list_of_lists.copy()
-    while l:
-        item = l.pop(-1)
+    result_list = []
+    copy_of_list = list_of_lists.copy()
+    while copy_of_list:
+        item = copy_of_list.pop(-1)
         if type(item) is list:
-            l.extend(item)
+            copy_of_list.extend(item)
         else:
-            my_list.append(item)
+            result_list.append(item)
 
-    for i in my_list[::-1]:
+    for i in result_list[::-1]:
         yield i
-
 
 
 def test_2():
